@@ -265,11 +265,11 @@ class MPU6050
     }
 
     float getPitch(int data[]) {
-      return atan2((float) - data[0], sqrt(((float)data[2] * data[2]) + ((float)data[1] * data[1]))) * RAD_TO_DEG;
+      return atan2((float) -data[0], sqrt(((float)data[2] * data[2]) + ((float)data[1] * data[1]))) * RAD_TO_DEG;
     }
 
     float getRoll(int data[]) {
-      return atan2((float)data[1] , sqrt(((float)data[2] * data[2]) + ((float)data[0] * data[0]))) * RAD_TO_DEG;
+      return atan2((float)data[1], sqrt(((float)data[2] * data[2]) + ((float)data[0] * data[0]))) * RAD_TO_DEG;
     }
 
     float getPitch(float data[]) {
@@ -278,7 +278,7 @@ class MPU6050
 
     float getRoll(float data[]) {
       return atan2(data[1], sqrt((data[2] * data[2]) + (data[0] * data[0]))) * RAD_TO_DEG;
-	  }
+    }
 };
 
 class Magnetometer
@@ -330,13 +330,13 @@ class Magnetometer
 //      data[1] = ((float)temp[1] - mag_offset[1]) * mag_scale;
 //      data[2] = ((float)temp[2] - mag_offset[2]) * mag_scale;
 
-            x = (float)temp[0] * mag_scale - mag_offset[0];                    //versi AHRS
-            y = (float)temp[1]  * mag_scale - mag_offset[1];
-            z = (float)temp[2] * mag_scale  - mag_offset[2];
-      
-            data[0] = x * mag_softiron_matrix[0][0] + y * mag_softiron_matrix[0][1] + z * mag_softiron_matrix[0][2];
-            data[1] = x * mag_softiron_matrix[1][0] + y * mag_softiron_matrix[1][1] + z * mag_softiron_matrix[1][2];
-            data[2] = x * mag_softiron_matrix[2][0] + y * mag_softiron_matrix[2][1] + z * mag_softiron_matrix[2][2];
+      x = (float)temp[0] * mag_scale - mag_offset[0];            //versi AHRS
+      y = (float)temp[1] * mag_scale - mag_offset[1];
+      z = (float)temp[2] * mag_scale - mag_offset[2];
+
+      data[0] = x * mag_softiron_matrix[0][0] + y * mag_softiron_matrix[0][1] + z * mag_softiron_matrix[0][2];
+      data[1] = x * mag_softiron_matrix[1][0] + y * mag_softiron_matrix[1][1] + z * mag_softiron_matrix[1][2];
+      data[2] = x * mag_softiron_matrix[2][0] + y * mag_softiron_matrix[2][1] + z * mag_softiron_matrix[2][2];
 
     }
 
@@ -430,6 +430,21 @@ class TENDOF
       data[2] = (buffer[4] << 8) | buffer[5];
     }
 
+    float getPitch(int data[]) {
+      return atan2((float) -data[0], sqrt(((float)data[2] * data[2]) + ((float)data[1] * data[1]))) * RAD_TO_DEG;
+    }
+
+    float getRoll(int data[]) {
+      return atan2((float)data[1], sqrt(((float)data[2] * data[2]) + ((float)data[0] * data[0]))) * RAD_TO_DEG;
+    }
+
+    float getPitch(float data[]) {
+      return atan2(-data[0], sqrt((data[2] * data[2]) + (data[1] * data[1]))) * RAD_TO_DEG;
+    }
+
+    float getRoll(float data[]) {
+      return atan2(data[1], sqrt((data[2] * data[2]) + (data[0] * data[0]))) * RAD_TO_DEG;
+    }
 };
 
 #endif _IMU_SENSOR_H_
